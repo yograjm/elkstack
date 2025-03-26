@@ -1,0 +1,19 @@
+metricbeat.modules:
+- module: system
+  metricsets:
+    - cpu
+    - memory
+  enabled: true
+  period: 10s
+  processes: ['.*']
+  cpu.metrics:  ["percentages","normalized_percentages"]
+
+output.logstash:
+  hosts: ["logstash:5044"]
+  enabled: false
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+
+setup.kibana.host: "http://kibana:5601"
+setup.dashboards.enabled: true
